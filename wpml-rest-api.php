@@ -82,6 +82,7 @@ function wpmlrestapi_slug_get_translations( $object, $field_name, $request ) {
 		if ($post_id === null || $post_id == $object['id']) continue;
 		$thisPost = get_post($post_id);
 
+		/*
 		$href= apply_filters( 'WPML_filter_link', $language[ 'url' ], $language );
 		if (strpos($href, '?') !== false) {
 			$href = str_replace('?', '/' . $thisPost->post_name . '/?', $href);
@@ -93,8 +94,15 @@ function wpmlrestapi_slug_get_translations( $object, $field_name, $request ) {
 
 			$href .= $thisPost->post_name . '/';
 		}
+		*/
 
-		$translations[] = array('locale' => $language['default_locale'], 'id' => $thisPost->ID, 'post_title' => $thisPost->post_title, 'href' => $href);
+		$translations[$language['language_code']] = array(
+			// 'locale' => $language['language_code'],
+			// 'id' => $thisPost->ID, 
+			'post_title' => $thisPost->post_title,
+			// 'href' => $href,
+			'slug' => $thisPost->post_name			
+		);
 	}
 
 	return $translations;
@@ -111,5 +119,5 @@ function wpmlrestapi_slug_get_translations( $object, $field_name, $request ) {
  */
 function wpmlrestapi_slug_get_current_locale( $object, $field_name, $request ) {
 	$langInfo = wpml_get_language_information($object);
-	return $langInfo['locale'];
+	return $langInfo['language_code'];
 }
