@@ -96,8 +96,8 @@ function wpmlrestapi_slug_get_translations( $object, $field_name, $request ) {
 		}
 		*/
 
-		$translations[$language['language_code']] = array(
-			// 'locale' => $language['language_code'],
+		$translations[] = array(
+			'locale' => $language['language_code'],
 			// 'id' => $thisPost->ID, 
 			'post_title' => $thisPost->post_title,
 			// 'href' => $href,
